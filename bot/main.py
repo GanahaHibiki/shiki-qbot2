@@ -76,8 +76,8 @@ async def connect_and_run() -> None:
                         await handle_event(event, ws)
                     except asyncio.TimeoutError:
                         continue
-                    except ConnectionClosed:
-                        logger.warning("WebSocket 连接关闭")
+                    except ConnectionClosed as e:
+                        logger.warning(f"WebSocket 连接关闭: code={e.code}, reason={e.reason}")
                         break
 
         except Exception as e:
