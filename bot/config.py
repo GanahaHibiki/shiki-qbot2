@@ -29,7 +29,7 @@ def load_config(config_path: str = "config.yaml") -> Config:
 
     # 从 yaml 文件加载
     path = Path(config_path)
-    if path.exists():
+    if path.is_file():
         with open(path, "r", encoding="utf-8") as f:
             data = yaml.safe_load(f) or {}
 
