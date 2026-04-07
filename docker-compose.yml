@@ -4,13 +4,15 @@ services:
     container_name: napcat
     environment:
       - ACCOUNT=${QQ_ACCOUNT}
-      - WSR_ENABLE=true
-      - WS_URLS=["ws://bot:8080"]
+      - WS_ENABLE=true
+      - NAPCAT_GID=${NAPCAT_GID:-0}
+      - NAPCAT_UID=${NAPCAT_UID:-0}
     volumes:
       - ./napcat/config:/app/napcat/config
       - ./napcat/data:/app/.config/QQ
     ports:
       - "6099:6099"  # WebUI
+      - "3001:3001"  # WebSocket
     restart: unless-stopped
     networks:
       - qq-bot
