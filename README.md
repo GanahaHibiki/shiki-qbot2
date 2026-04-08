@@ -1,4 +1,4 @@
-# QQ Bot (shiki-qbot2)
+# QQ Bot (shiki-qbot1)
 
 基于 NapCat 的 QQ 群聊机器人，支持 Docker 一键部署。
 
@@ -33,7 +33,7 @@
 ## 目录结构
 
 ```
-shiki-qbot2/
+shiki-qbot1/
 ├── bot/                  # 机器人代码
 │   ├── main.py           # 入口
 │   ├── config.py         # 配置加载

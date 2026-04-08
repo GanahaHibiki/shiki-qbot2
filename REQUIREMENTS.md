@@ -103,7 +103,7 @@ services:
 ### 目录结构
 
 ```
-shiki-qbot2/
+shiki-qbot1/
 ├── bot/
 │   ├── main.py           # 入口文件
 │   ├── config.py         # 配置加载
