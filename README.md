@@ -27,7 +27,10 @@
 | `REPEAT_PROBABILITY` | 复读概率 (0-100) | `5` |
 | `AI_REPLY_PROBABILITY` | AI回复概率 (0-100) | `10` |
 | `AI_MODEL` | AI模型名称 | `deepseek-ai/DeepSeek-V3` |
+| `AI_SYSTEM_PROMPT` | AI提示词 | 见配置文件 |
 | `AI_API_KEY` | AI API密钥 (SiliconFlow) | 可选 |
+| `HTTP_PROXY` | HTTP代理 | 可选 |
+| `HTTPS_PROXY` | HTTPS代理 | 可选 |
 | `LOG_LEVEL` | 日志级别 | `INFO` |
 
 ### config.yaml

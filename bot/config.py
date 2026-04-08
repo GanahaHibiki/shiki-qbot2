@@ -18,6 +18,8 @@ class AIReplyConfig:
     api_key: str = ""
     model: str = "deepseek-ai/DeepSeek-V3"
     system_prompt: str = "你是一个活泼可爱的群聊助手，喜欢用简洁幽默的方式回复消息。请用1-2句话自然地回应用户，不要过于正式。"
+    http_proxy: str = ""  # HTTP 代理
+    https_proxy: str = ""  # HTTPS 代理
 
 
 @dataclass
@@ -63,6 +65,8 @@ def load_config(config_path: str = "config.yaml") -> Config:
                 api_key=data["ai_reply"].get("api_key", config.ai_reply.api_key),
                 model=data["ai_reply"].get("model", config.ai_reply.model),
                 system_prompt=data["ai_reply"].get("system_prompt", config.ai_reply.system_prompt),
+                http_proxy=data["ai_reply"].get("http_proxy", config.ai_reply.http_proxy),
+                https_proxy=data["ai_reply"].get("https_proxy", config.ai_reply.https_proxy),
             )
 
         config.log_level = data.get("log_level", config.log_level)
@@ -83,8 +87,18 @@ def load_config(config_path: str = "config.yaml") -> Config:
     if ai_model := os.getenv("AI_MODEL"):
         config.ai_reply.model = ai_model
 
+    if ai_system_prompt := os.getenv("AI_SYSTEM_PROMPT"):
+        config.ai_reply.system_prompt = ai_system_prompt
+
     if ai_prob := os.getenv("AI_REPLY_PROBABILITY"):
         config.ai_reply.probability = int(ai_prob)
+
+    # 代理配置（支持标准环境变量）
+    if http_proxy := os.getenv("HTTP_PROXY") or os.getenv("http_proxy"):
+        config.ai_reply.http_proxy = http_proxy
+
+    if https_proxy := os.getenv("HTTPS_PROXY") or os.getenv("https_proxy"):
+        config.ai_reply.https_proxy = https_proxy
 
     if log_level := os.getenv("LOG_LEVEL"):
         config.log_level = log_level

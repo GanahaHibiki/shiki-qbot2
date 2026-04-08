@@ -13,7 +13,22 @@ class AIReplyHandler(MessageHandler):
 
     def __init__(self, config):
         super().__init__(config)
-        self.client = httpx.AsyncClient(timeout=30.0)
+
+        # 配置代理
+        proxies = {}
+        if self.config.ai_reply.http_proxy:
+            proxies["http://"] = self.config.ai_reply.http_proxy
+            logger.info(f"配置 HTTP 代理: {self.config.ai_reply.http_proxy}")
+
+        if self.config.ai_reply.https_proxy:
+            proxies["https://"] = self.config.ai_reply.https_proxy
+            logger.info(f"配置 HTTPS 代理: {self.config.ai_reply.https_proxy}")
+
+        # 创建 HTTP 客户端（带或不带代理）
+        self.client = httpx.AsyncClient(
+            timeout=30.0,
+            proxies=proxies if proxies else None
+        )
 
     async def should_handle(self, event: dict[str, Any]) -> bool:
         """判断是否处理: 群消息 + 随机概率命中 + 功能开启"""
